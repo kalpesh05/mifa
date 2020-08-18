@@ -1,7 +1,7 @@
 /**
  * API authentication middleware
  */
-const { getOneWhere } = require("../../services/TokenService");
+const { getOneWhere } = require("../../services/tokenService");
 
 const { UNAUTHORIZED } = require("../constants/errorMessages");
 
