@@ -10,8 +10,8 @@ const ExtractJwt = passportJWT.ExtractJwt;
 const JwtStrategy = passportJWT.Strategy;
 const config = require("../configs");
 const { cryptoPassword } = require("../helpers/commonFunction");
-const { getOneWhere } = require("../services/UserService");
-const { create, getOne } = require("../services/TokenService");
+const { getOneWhere } = require("../services/userService");
+const { create, getOne } = require("../services/tokenService");
 
 const {
   INVALID_PASSWORD,
