@@ -42,6 +42,10 @@ exports.login = Joi.object().keys({
   role: Joi.string()
     .error(new Error(errorMessages.ROLE))
     .optional()
+    .required(),
+  class_code: Joi.string()
+    .error(new Error(errorMessages.CLASS_CODE_INVALID))
+    .optional()
 });
 
 exports.forgotPassword = Joi.object().keys({

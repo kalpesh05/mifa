@@ -63,10 +63,15 @@ const loginLocalStrategy = new localStrategy(
   {
     usernameField: "username",
     passwordField: "password",
+    passReqToCallback: true,
     session: false
   },
-  async (email, password, done) => {
+  async (req, email, password, done) => {
     let field = email.includes("@") ? { email: email } : { username: email };
+    field = req.body.class_code
+      ? { ...field, ...{ class_code: req.body.class_code } }
+      : field;
+    console.log(field);
     let user = await getOneWhere(field);
     user = user[0];
     if (!user) {

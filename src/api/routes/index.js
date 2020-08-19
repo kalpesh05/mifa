@@ -19,6 +19,12 @@ const routes = [
   },
   // user
   {
+    method: "GET",
+    path: "/users",
+    handler: "UserController.getAllUsers",
+    authenticate: true
+  },
+  {
     method: "POST",
     path: "/users",
     handler: "UserController.create",
