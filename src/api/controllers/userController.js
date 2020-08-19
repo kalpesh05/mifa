@@ -82,11 +82,11 @@ class userController {
       } else if (body.role === "student") {
         body.class_code = req.user.class_code;
       }
-      console.log("????", body);
+      // console.log("????", body);
       const createUser = await userService.create(body);
 
       const getUser = await userService.getOneWhere({
-        email: body.email
+        email: createUser.insertId
       });
 
       return res.json({

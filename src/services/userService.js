@@ -37,10 +37,15 @@ class userService {
     // try {
     // let obj = { data: null, error: null };
     // try {
-    let user = await userModel.findOne({
-      email: model.email,
-      class_code: model.class_code
-    });
+    let user =
+      model.role && model.role === "student"
+        ? await userModel.findOne({
+            email: model.email,
+            class_code: model.class_code
+          })
+        : await userModel.findOne({
+            email: model.email
+          });
     // console.log(user);
     // if (user) obj.error = EMAIL_ADDRESS_ALREADY_REGISTERED;
     if (user.length > 0) throw new Error(EMAIL_ADDRESS_ALREADY_REGISTERED);
