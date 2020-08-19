@@ -27,6 +27,7 @@ exports.LOGIN_FAILED = "400::Login failed.";
 exports.PASSWORD_INVALID = "400::Password is invalid.";
 exports.EMAIL_INVALID = "400::Email is invalid.";
 exports.CLASS_CODE_INVALID = "400::ClassCode is invalid.";
+exports.CLASS_CODE_MISSING = "400::ClassCode is missing.";
 exports.EMAIL_VERIFICATION = "400::Email is not verify.";
 exports.LOGIN_AGAIN = "401::Login again.";
 exports.USER_NOT_FOUND = "400::User not found.";

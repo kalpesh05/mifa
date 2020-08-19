@@ -16,7 +16,8 @@ const { create, getOne } = require("../services/tokenService");
 const {
   INVALID_PASSWORD,
   UNAUTHORIZED,
-  USER_NOT_FOUND
+  USER_NOT_FOUND,
+  CLASS_CODE_MISSING
 } = require("../api/constants/errorMessages");
 
 passport.serializeUser(async (user, done) => {
@@ -71,7 +72,11 @@ const loginLocalStrategy = new localStrategy(
     field = req.body.class_code
       ? { ...field, ...{ class_code: req.body.class_code } }
       : field;
-    console.log(field);
+
+    if (req.body.role === "student" && !req.body.class_code) {
+      return done({ message: CLASS_CODE_MISSING }, false);
+    }
+
     let user = await getOneWhere(field);
     user = user[0];
     if (!user) {
