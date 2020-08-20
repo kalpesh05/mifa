@@ -86,11 +86,11 @@ class userController {
       const createUser = await userService.create(body);
 
       const getUser = await userService.getOneWhere({
-        email: createUser.insertId
+        id: createUser.insertId
       });
 
       return res.json({
-        data: getUser
+        data: getUser[0]
       });
     } catch (e) {
       return next(e);

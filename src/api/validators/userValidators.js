@@ -48,7 +48,10 @@ exports.create = Joi.object().keys({
   email: Joi.string()
     .email()
     .error(new Error(errorMessages.EMAIL_INVALID))
-    .required(),
+    .optional(),
+  username: Joi.string()
+    .error(new Error(errorMessages.USERNAME))
+    .optional(),
   role: Joi.string()
     .error(new Error(errorMessages.ROLE))
     .required(),
