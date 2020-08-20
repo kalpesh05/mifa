@@ -17,6 +17,12 @@ const routes = [
     path: "/login",
     handler: "AuthController.login"
   },
+  {
+    method: "GET",
+    path: "/user-profile",
+    handler: "AuthController.getMyDetail",
+    authenticate: true
+  },
   // user
   {
     method: "GET",

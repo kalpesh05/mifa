@@ -19,7 +19,7 @@ const apiAuth = async (req, res, next) => {
     token = token.slice(7, token.length);
 
     const tokenFound = await getOneWhere({ token });
-    console.log(">>>>", tokenFound);
+    // console.log(">>>>", tokenFound);
     if (tokenFound) {
       return next();
     } else {

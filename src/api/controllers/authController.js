@@ -313,14 +313,14 @@ class authController {
   async getMyDetail(req, res, next) {
     try {
       // console.log(req.user);
-      const user = await userService.getOne(req.user._id);
+      const user = await userService.getOne(req.user.id);
 
       /**
        * API response
        */
       return res.send({
         message: "",
-        data: user
+        data: user[0]
       });
     } catch (error) {
       return next(error);
