@@ -113,3 +113,16 @@ CREATE TABLE `answers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ```
+
+
+```
+ALTER TABLE `mifa`.`tokens` 
+DROP FOREIGN KEY `tokens_ibfk_1`;
+ALTER TABLE `mifa`.`tokens` 
+ADD CONSTRAINT `tokens_ibfk_1`
+  FOREIGN KEY (`user_id`)
+  REFERENCES `mifa`.`users` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+```
