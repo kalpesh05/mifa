@@ -126,7 +126,7 @@ class authController {
       );
       // console.log(req.user);
       let token = await tokenService.remove({
-        user_id: user._id,
+        user_id: user.id,
         token: tokenString
       });
 

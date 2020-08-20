@@ -181,6 +181,46 @@ class userController {
       return next(error);
     }
   }
+
+  /**
+   * Delete  question
+   * @param req
+   * @param res
+   * @returns {Promise<*>}
+   */
+  async remove(req, res, next) {
+    let { params } = req;
+    let { getOneWhere, remove } = userService;
+
+    try {
+      /**
+       * Check valid  user
+       */
+      let userExist = await getOneWhere({
+        id: params.user_id
+      });
+
+      if (!userExist) throw new Error(QUESTION_NOT_FOUND);
+
+      /**
+       * Delete  user
+       */
+      let userRemove = await remove({
+        id: params.user_id
+      });
+
+      /**
+       * API response
+       */
+
+      return res.send({
+        message: "",
+        data: {}
+      });
+    } catch (error) {
+      return next(error);
+    }
+  }
 }
 
 module.exports = new userController();

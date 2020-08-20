@@ -19,6 +19,12 @@ const routes = [
   },
   {
     method: "GET",
+    path: "/logout",
+    handler: "AuthController.logout",
+    authenticate: true
+  },
+  {
+    method: "GET",
     path: "/user-profile",
     handler: "AuthController.getMyDetail",
     authenticate: true
@@ -58,6 +64,12 @@ const routes = [
     method: "POST",
     path: "/users/student/check",
     handler: "UserController.userCheck",
+    authenticate: true
+  },
+  {
+    method: "DELETE",
+    path: "/users/:user_id",
+    handler: "UserController.remove",
     authenticate: true
   },
   // question
