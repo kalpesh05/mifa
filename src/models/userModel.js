@@ -69,7 +69,8 @@ exports.update = async (where, data) => {
   filterdWhere = condition.length > 0 ? condition.join("and") : filterdWhere;
   let user = [];
   for (var i in data) {
-    user.push(`${i}=${data[i]}`);
+    // let val = typeof data[i] !== "" ? data[i] : `"${data[i]}"`;
+    user.push(` ${i}="${data[i]}"`);
   }
   data = user.join();
   return await db.query(`UPDATE users SET ${data} where ${filterdWhere}`);
