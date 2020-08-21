@@ -74,6 +74,9 @@ exports.update = Joi.object().keys({
     .email()
     .error(new Error(errorMessages.EMAIL_INVALID))
     .optional(),
+  username: Joi.string()
+    .error(new Error(errorMessages.USERNAME))
+    .optional(),
   role: Joi.string()
     .error(new Error(errorMessages.ROLE))
     .optional(),
@@ -100,5 +103,11 @@ exports.userCheck = Joi.object().keys({
     .required(),
   last_name: Joi.string()
     .error(new Error(errorMessages.LAST_NAME))
-    .required()
+    .required(),
+  username: Joi.string()
+    .error(new Error(errorMessages.USERNAME))
+    .optional(),
+  password: Joi.string()
+    .error(new Error(errorMessages.PASSWORD))
+    .optional()
 });
