@@ -57,7 +57,7 @@ exports.update = async (where, data) => {
   filterdWhere = condition.length > 0 ? condition.join("and") : filterdWhere;
   let level = [];
   for (var i in data) {
-    level.push(`${i}=${data[i]}`);
+    level.push(`${i}="${data[i]}"`);
   }
   data = level.join();
   return await db.query(`UPDATE levels SET ${data} where ${filterdWhere}`);

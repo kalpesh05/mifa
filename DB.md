@@ -126,3 +126,15 @@ ADD CONSTRAINT `tokens_ibfk_1`
   ON UPDATE CASCADE;
 
 ```
+
+```
+ALTER TABLE `mifa`.`levels` 
+CHANGE COLUMN `index` `levle_index` INT(10) NULL DEFAULT NULL ;
+
+```
+
+```
+ALTER TABLE `mifa`.`assesment_types` 
+CHANGE COLUMN `index` `assesment_type_index` INT(10) NULL DEFAULT NULL ;
+
+```
