@@ -39,8 +39,8 @@ class answerService {
     return answerModel.update({ id: id }, model);
   }
 
-  async remove(id) {
-    return answerModel.remove({ id: id });
+  async remove(query) {
+    return answerModel.remove(query);
   }
 }
 

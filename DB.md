@@ -144,3 +144,21 @@ ALTER TABLE `mifa`.`users`
 ADD COLUMN `level` INT(10) NULL AFTER `updated_at`;
 
 ```
+
+```
+ALTER TABLE `mifa`.`assesment_types` 
+DROP FOREIGN KEY `assesment_types_ibfk_1`;
+ALTER TABLE `mifa`.`assesment_types` 
+ADD CONSTRAINT `assesment_types_ibfk_1`
+  FOREIGN KEY (`created_by`)
+  REFERENCES `mifa`.`users` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+```
+
+```
+ALTER TABLE `mifa`.`levels` 
+DROP FOREIGN KEY `levels_ibfk_1`;
+
+```

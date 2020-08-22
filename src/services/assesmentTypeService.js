@@ -31,8 +31,8 @@ class assesmentTypeService {
     return assesmentTypeModel.update({ id: id }, model);
   }
 
-  async remove(id) {
-    return assesmentTypeModel.remove({ id: id });
+  async remove(query) {
+    return assesmentTypeModel.remove(query);
   }
 }
 
