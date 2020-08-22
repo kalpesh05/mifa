@@ -18,7 +18,6 @@ exports.register = Joi.object().keys({
     .error(new Error(errorMessages.LAST_NAME))
     .required(),
   password: Joi.string()
-    .min(8)
     .error(new Error(errorMessages.PASSWORD))
     .required(),
   role: Joi.string()
@@ -36,7 +35,6 @@ exports.login = Joi.object().keys({
     .error(new Error(errorMessages.USERNAME))
     .required(),
   password: Joi.string()
-    .min(8)
     .error(new Error(errorMessages.PASSWORD))
     .required(),
   role: Joi.string()
