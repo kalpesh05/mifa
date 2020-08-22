@@ -138,3 +138,9 @@ ALTER TABLE `mifa`.`assesment_types`
 CHANGE COLUMN `index` `assesment_type_index` INT(10) NULL DEFAULT NULL ;
 
 ```
+
+```
+ALTER TABLE `mifa`.`users` 
+ADD COLUMN `level` INT(10) NULL AFTER `updated_at`;
+
+```

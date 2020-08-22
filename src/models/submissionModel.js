@@ -57,7 +57,7 @@ exports.update = async (where, data) => {
   filterdWhere = condition.length > 0 ? condition.join("and") : filterdWhere;
   let submission = [];
   for (var i in data) {
-    submission.push(`${i}=${data[i]}`);
+    submission.push(`${i}="${data[i]}"`);
   }
   data = submission.join();
   return await db.query(`UPDATE submissions SET ${data} where ${filterdWhere}`);

@@ -148,19 +148,19 @@ class userController {
 
       let userUpdate = await update(params.user_id, body);
 
-      if (body.assigned_level || body.level) {
-        let updated_level = body.assigned_level
-          ? body.assigned_level
-          : body.level;
-        let getSubmission = await submissionService.getOneWhere({
-          created_by: req.user.id
-        });
+      // if (body.assigned_level || body.level) {
+      //   let updated_level = body.assigned_level
+      //     ? body.assigned_level
+      //     : body.level;
+      //   let getSubmission = await submissionService.getOneWhere({
+      //     created_by: req.user.id
+      //   });
 
-        let submissionUpdate = await submissionService.update(
-          getSubmission[0].id,
-          { assigned_level: updated_level }
-        );
-      }
+      //   let submissionUpdate = await submissionService.update(
+      //     getSubmission[0].id,
+      //     { assigned_level: updated_level }
+      //   );
+      // }
 
       /**
        * find  user after update

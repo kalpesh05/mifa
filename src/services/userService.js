@@ -33,7 +33,9 @@ class userService {
   }
 
   async create(model) {
-    model.username = `${model.first_name} ${model.last_name}`;
+    model.username = model.username
+      ? model.username
+      : `${model.first_name} ${model.last_name}`;
     // try {
     // let obj = { data: null, error: null };
     // try {

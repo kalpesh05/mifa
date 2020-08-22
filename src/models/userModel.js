@@ -51,7 +51,7 @@ exports.findOne = async (
   filterdWhere = condition.length > 0 ? condition.join("and") : filterdWhere;
 
   return await db.query(
-    `SELECT users.*, submissions.assigned_level as level FROM users LEFT JOIN submissions ON submissions.created_by = users.id where ${filterdWhere} ${gropuBy} ${gropuBy}`
+    `SELECT * FROM users where ${filterdWhere} ${gropuBy} ${gropuBy}`
   );
 };
 
@@ -73,6 +73,7 @@ exports.update = async (where, data) => {
     user.push(` ${i}="${data[i]}"`);
   }
   data = user.join();
+  console.log(data);
   return await db.query(`UPDATE users SET ${data} where ${filterdWhere}`);
 };
 

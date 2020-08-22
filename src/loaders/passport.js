@@ -12,7 +12,7 @@ const config = require("../configs");
 const { cryptoPassword } = require("../helpers/commonFunction");
 const { getOneWhere } = require("../services/userService");
 const { create, getOne } = require("../services/tokenService");
-
+const { omit } = require("lodash");
 const {
   INVALID_PASSWORD,
   UNAUTHORIZED,
@@ -78,7 +78,8 @@ const loginLocalStrategy = new localStrategy(
     }
 
     let user = await getOneWhere(field);
-    user = user[0];
+    console.log(user[0]);
+    user = req.body.role === "student" ? user[0] : omit(user[0], ["level"]);
     if (!user) {
       return done({ message: USER_NOT_FOUND }, false);
     }
