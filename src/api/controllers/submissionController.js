@@ -176,7 +176,7 @@ class submissionController {
 
       return res.send({
         message: "",
-        data: submissionRemove
+        data: {}
       });
     } catch (error) {
       return next(error);

@@ -163,8 +163,7 @@ class assesmentTypeController {
        * Delete assesmentType
        */
       let assesmentTypeRemove = await remove({
-        id: params.assesmentType_id,
-        deleted_at: null
+        id: params.assesmentType_id
       });
 
       /**
@@ -173,7 +172,7 @@ class assesmentTypeController {
 
       return res.send({
         message: "",
-        data: assesmentTypeRemove
+        data: {}
       });
     } catch (error) {
       return next(error);

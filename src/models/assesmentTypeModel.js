@@ -66,7 +66,6 @@ exports.update = async (where, data) => {
 };
 
 exports.remove = async where => {
-  let filterdWhere = structuredWhere();
-
+  let filterdWhere = structuredWhere(where);
   return await db.query(`DELETE FROM assesment_types where ${filterdWhere}`);
 };

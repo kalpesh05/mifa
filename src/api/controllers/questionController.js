@@ -168,7 +168,7 @@ class questionController {
 
       return res.send({
         message: "",
-        data: questionRemove
+        data: {}
       });
     } catch (error) {
       return next(error);

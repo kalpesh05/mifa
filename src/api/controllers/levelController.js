@@ -168,7 +168,7 @@ class levelController {
 
       return res.send({
         message: "",
-        data: levelRemove
+        data: {}
       });
     } catch (error) {
       return next(error);
