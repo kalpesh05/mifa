@@ -2,7 +2,7 @@ const { levelModel } = require("../models");
 const { ALREADY_EXIST } = require("../api/constants/errorMessages");
 
 class levelService {
-  async getAlllevelsWhere(where = {}) {
+  async getWhere(where = {}) {
     return levelModel.find(where);
   }
 

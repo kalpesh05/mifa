@@ -25,8 +25,8 @@ exports.find = async (
       condition.push(` ${Object.keys(where)[i]}="${Object.values(where)[i]}" `);
     }
   }
-  filterdWhere = condition.length > 0 ? condition.join("and") : filterdWhere;
-  // console.log(">>>>>>", filterdWhere);
+  filterdWhere += condition.length > 0 ? condition.join("and") : filterdWhere;
+  console.log(">>>>>>", filterdWhere);
   // let query;
   return await db.query(
     `SELECT * FROM questions ${filterdWhere} ${orderBy} ${gropuBy}`

@@ -15,14 +15,16 @@ exports.find = async (
   gropuBy = ""
 ) => {
   let filterdWhere = "";
+  let condition = [];
 
   if (!isEmpty(where)) {
     filterdWhere = "where ";
+
     for (let i in Object.keys(where)) {
-      console.log(Object.values(where).join());
-      filterdWhere += `${Object.keys(where)[i]}="${Object.values(where)[i]}"`;
+      condition.push(` ${Object.keys(where)[i]}="${Object.values(where)[i]}" `);
     }
   }
+  filterdWhere += condition.length > 0 ? condition.join("and") : filterdWhere;
   console.log(">>>>>>", filterdWhere);
   // let query;
   return await db.query(

@@ -20,7 +20,7 @@ const {
 } = require("../helpers/mailSendUsingTemplateId");
 
 class userService {
-  async getAllUsersWhere(where = {}) {
+  async getAllWhere(where = {}) {
     return userModel.find(where);
   }
 

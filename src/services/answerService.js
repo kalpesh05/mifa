@@ -2,7 +2,7 @@ const { answerModel, questionModel } = require("../models");
 const { ALREADY_EXIST } = require("../api/constants/errorMessages");
 
 class answerService {
-  async getAllanswersWhere(where = {}) {
+  async getAllWhere(where = {}) {
     return answerModel.find(where);
   }
 

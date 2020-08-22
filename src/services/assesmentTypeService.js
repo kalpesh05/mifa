@@ -2,7 +2,7 @@ const { assesmentTypeModel } = require("../models");
 const { ALREADY_EXIST } = require("../api/constants/errorMessages");
 
 class assesmentTypeService {
-  async getAllassesmentTypesWhere(where = {}) {
+  async getAllWhere(where = {}) {
     return assesmentTypeModel.find(where);
   }
 

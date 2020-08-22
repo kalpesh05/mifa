@@ -2,7 +2,7 @@ const { submissionModel } = require("../models");
 const { ALREADY_EXIST } = require("../api/constants/errorMessages");
 
 class submissionService {
-  async getAllsubmissionsWhere(where = {}) {
+  async getAllWhere(where = {}) {
     return submissionModel.find(where);
   }
 

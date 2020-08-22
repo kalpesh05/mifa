@@ -27,8 +27,8 @@ exports.find = async (
       // console.log(Object.values(where).join());
     }
   }
-  filterdWhere = condition.length > 0 ? condition.join("and") : filterdWhere;
-  console.log(">>>>>>", filterdWhere);
+  filterdWhere += condition.length > 0 ? condition.join("and") : filterdWhere;
+  // console.log(">>>>>>", filterdWhere);
 
   // let query;
   return await db.query(
