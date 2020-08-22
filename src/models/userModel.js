@@ -32,7 +32,7 @@ exports.find = async (
 
   // let query;
   return await db.query(
-    `SELECT users.*, submissions.assigned_level as level FROM users LEFT JOIN submissions ON submissions.created_by = users.id ${filterdWhere} ${orderBy} ${gropuBy}`
+    `SELECT * FROM users  ${filterdWhere} ${orderBy} ${gropuBy}`
   );
 };
 
