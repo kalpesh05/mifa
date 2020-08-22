@@ -11,7 +11,7 @@ exports.create = async data => {
 
 exports.find = async (
   where = {},
-  orderBy = "order by created_at desc",
+  orderBy = "order by created_at asc",
   gropuBy = ""
 ) => {
   let filterdWhere = "";

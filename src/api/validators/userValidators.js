@@ -63,7 +63,10 @@ exports.create = Joi.object().keys({
     .required(),
   password: Joi.string()
     .error(new Error(errorMessages.PASSWORD))
-    .required()
+    .required(),
+  level: Joi.string()
+    .error(new Error(errorMessages.LEVEL))
+    .optional()
 });
 
 exports.update = Joi.object().keys({
