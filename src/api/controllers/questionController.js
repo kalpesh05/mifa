@@ -107,9 +107,7 @@ class questionController {
       /**
        * Check valid  question
        */
-      let questionExist = await getOneWhere({
-        id: params.question_id
-      });
+      let questionExist = await getOneWhere(params.question_id);
 
       if (!questionExist) throw new Error(QUESTION_NOT_FOUND);
 
@@ -158,9 +156,7 @@ class questionController {
       /**
        * Delete  question
        */
-      let questionRemove = await remove({
-        id: params.question_id
-      });
+      let questionRemove = await remove(params.question_id);
 
       /**
        * API response

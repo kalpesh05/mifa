@@ -158,9 +158,7 @@ class levelController {
       /**
        * Delete level
        */
-      let levelRemove = await remove({
-        id: params.level_id
-      });
+      let levelRemove = await remove(params.level_id);
 
       /**
        * API response

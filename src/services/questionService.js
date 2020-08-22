@@ -29,8 +29,8 @@ class questionService {
     return questionModel.update({ id: id }, model);
   }
 
-  async remove(query) {
-    return questionModel.remove(query);
+  async remove(id) {
+    return questionModel.remove(id);
   }
 }
 

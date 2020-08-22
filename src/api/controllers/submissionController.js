@@ -165,10 +165,7 @@ class submissionController {
       /**
        * Delete submission
        */
-      let submissionRemove = await remove({
-        id: params.submission_id,
-        deleted_at: null
-      });
+      let submissionRemove = await remove(params.submission_id);
 
       /**
        * API response

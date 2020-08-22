@@ -29,8 +29,8 @@ class levelService {
     return levelModel.update({ id: id }, model);
   }
 
-  async remove(query) {
-    return levelModel.remove(query);
+  async remove(id) {
+    return levelModel.remove(id);
   }
 }
 

@@ -63,7 +63,7 @@ exports.update = async (where, data) => {
   return await db.query(`UPDATE submissions SET ${data} where ${filterdWhere}`);
 };
 
-exports.remove = async where => {
-  let filterdWhere = structuredWhere(where);
-  return await db.query(`DELETE FROM submissions where ${filterdWhere}`);
+exports.remove = async id => {
+  // let filterdWhere = structuredWhere(where);
+  return await db.query(`DELETE FROM submissions where id = ${id}`);
 };

@@ -29,8 +29,8 @@ class submissionService {
     return submissionModel.update({ id: id }, model);
   }
 
-  async remove(query) {
-    return submissionModel.remove(query);
+  async remove(id) {
+    return submissionModel.remove(id);
   }
 }
 

@@ -162,9 +162,7 @@ class assesmentTypeController {
       /**
        * Delete assesmentType
        */
-      let assesmentTypeRemove = await remove({
-        id: params.assesmentType_id
-      });
+      let assesmentTypeRemove = await remove(params.assesmentType_id);
 
       /**
        * API response
