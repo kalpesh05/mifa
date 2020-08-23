@@ -18,6 +18,7 @@ exports.EMAIL_ADDRESS_ALREADY_REGISTERED =
 exports.USER_ALREADY_REGISTERED = "400::User already exist.";
 exports.ALREADY_EXIST = "400::Already exist.";
 exports.STUDENT_ALREADY_EXIST = "400::username already taken.";
+exports.TEACHER_ALREADY_EXIST = "400::User already exist.";
 exports.INVALID_EMAIL_TOKEN =
   "401::Email verify token is invalid or has expired.";
 exports.INVALID_TOKEN = "401::Invalid Token";

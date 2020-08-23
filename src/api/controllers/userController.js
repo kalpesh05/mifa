@@ -8,6 +8,7 @@ const {
 const {
   USER_ALREADY_REGISTERED,
   STUDENT_ALREADY_EXIST,
+  TEACHER_ALREADY_EXIST,
   DATABASE_INTERNAL,
   USER_NOT_FOUND
 } = require("../constants/errorMessages");
@@ -83,6 +84,11 @@ class userController {
     try {
       if (body.role === "teacher") {
         body.class_code = classCode();
+        let teacherExist = await userService.getOneWhere({
+          email: body.email
+        });
+
+        if (teacherExist.length > 0) throw new Error(TEACHER_ALREADY_EXIST);
       } else if (body.role === "student") {
         body.class_code = req.user.class_code;
 
