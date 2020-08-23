@@ -32,6 +32,10 @@ exports.find = async (
   );
 };
 
+exports.query = async query => {
+  return await db.query(query);
+};
+
 exports.findOne = async (
   where,
   orderBy = "order by created_at desc",

@@ -162,3 +162,8 @@ ALTER TABLE `mifa`.`levels`
 DROP FOREIGN KEY `levels_ibfk_1`;
 
 ```
+```
+ALTER TABLE `mifa`.`submissions` 
+CHANGE COLUMN `type` `status` VARCHAR(45) NULL DEFAULT NULL ;
+
+```

@@ -1,9 +1,14 @@
-const { userService, questionService } = require("../../services");
+const {
+  userService,
+  questionService,
+  answerService
+} = require("../../services");
 const {
   DUPLICATE_SLUG,
   DATABASE_INTERNAL,
   QUESTION_NOT_FOUND
 } = require("../constants/errorMessages");
+const { omit, orderBy, groupBy } = require("lodash");
 class questionController {
   /**
    * Get All  question
@@ -15,7 +20,19 @@ class questionController {
     let query = req.query ? req.query : {};
 
     try {
-      const questions = await questionService.getAllWhere(query);
+      let questions = await questionService.getAllWhere(query);
+      // questions = questions.map(v => omit(v, ["index"]));
+      for (let i in questions) {
+        let answers = await answerService.getAllWhere({
+          question_id: questions[i]["id"]
+        });
+        questions[i]["answers"] = answers;
+      }
+      questions = orderBy(questions, ["level_index"], ["asc"]).map(v =>
+        omit(v, ["level_index", "index"])
+      );
+      questions = groupBy(questions, "level_title");
+
       return res.json({
         message: "",
         data: questions
@@ -109,7 +126,7 @@ class questionController {
        */
       let questionExist = await getOneWhere(params.question_id);
 
-      if (!questionExist) throw new Error(QUESTION_NOT_FOUND);
+      if (questionExist.length === 0) throw new Error(QUESTION_NOT_FOUND);
 
       let questionUpdate = await update(params.question_id, body);
 

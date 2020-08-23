@@ -1,14 +1,16 @@
 const {
   userService,
   tokenService,
-  submissionService
+  submissionService,
+  questionService,
+  answerService
 } = require("../../services");
 const {
   USER_ALREADY_REGISTERED,
   DATABASE_INTERNAL,
   USER_NOT_FOUND
 } = require("../constants/errorMessages");
-const { groupBy } = require("lodash");
+const { groupBy, orderBy, omit } = require("lodash");
 const moment = require("moment-timezone");
 const { classCode } = require("../../helpers/commonFunction");
 class userController {
@@ -97,28 +99,47 @@ class userController {
     }
   }
 
-  async getAnswers(req, res, next) {
+  async getDetailedLastSubmission(req, res, next) {
     let { body } = req;
     try {
       let report = [];
       let finalReport = [];
-      let answers = await userService.getAnswers(req.user.id);
+      let getSubmission = await submissionService.getAllWhere({
+        created_by: req.user.id
+      });
 
-      for (let i in answers) {
-        let question = await userService.getQuestions(
-          answers[i]["question_id"]
+      let questions = await questionService.getAllWhere({});
+
+      for (let i in questions) {
+        let answers = await answerService.getAnswersByUserSubmissions(
+          req.user.id,
+          questions[i]["id"],
+          getSubmission[0].id
         );
+        // console.log(answers);
         report.push({
-          question: question[0]["question"],
-          question_id: question[0]["question_id"],
-          submission_id: question[0]["submission_id"],
-          answer: answers[i]["answer"],
-          is_correct: answers[i]["is_correct"],
-          retry_count: answers[i]["retry_count"]
+          question: questions[i]["question"],
+          question_id: questions[i]["id"],
+          level_id: questions[i]["level_id"],
+          level_title: questions[i]["level_title"],
+          level_index: questions[i]["level_index"],
+          submission_id: questions[i]["submission_id"],
+          answer: answers.length > 0 ? answers[0]["answer"] : null,
+          is_attempted: answers.length > 0 ? 1 : 0,
+          is_correct: answers.length > 0 ? answers[0]["is_correct"] : 0,
+          retry_count: answers.length > 0 ? answers[0]["retry_count"] : 0,
+          time_taken_in_ms:
+            answers.length > 0 && answers[0]["time_taken_in_ms"]
+              ? answers[0]["time_taken_in_ms"]
+              : 0
         });
       }
 
-      finalReport = groupBy(report, "question");
+      finalReport = orderBy(report, ["level_index"], ["asc"]).map(v =>
+        omit(v, ["level_index"])
+      );
+      finalReport = groupBy(finalReport, "level_title");
+
       return res.json({
         data: finalReport
       });

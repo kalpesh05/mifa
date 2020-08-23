@@ -56,8 +56,8 @@ const routes = [
   },
   {
     method: "GET",
-    path: "/users/:user_id/report",
-    handler: "UserController.getAnswers",
+    path: "/users/:user_id/get-detailed-last-submission",
+    handler: "UserController.getDetailedLastSubmission",
     authenticate: true
   },
   {

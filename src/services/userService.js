@@ -76,12 +76,6 @@ class userService {
     return userModel.remove(where);
   }
 
-  async getAnswers(id) {
-    return userModel.query(
-      `SELECT answers.*, submissions.type as submissionType, submissions.assigned_level as assignLevel FROM answers join submissions ON submissions.id = answers.submission_id where submissions.created_by = ${id}`
-    );
-  }
-
   async getQuestions(id) {
     return userModel.query(
       `SELECT questions.question FROM questions where id = ${id}`

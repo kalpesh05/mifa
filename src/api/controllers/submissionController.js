@@ -113,7 +113,7 @@ class submissionController {
         id: params.submission_id
       });
 
-      if (!submissionExist) throw new Error(SUBMISSION_NOT_FOUND);
+      if (submissionExist.length === 0) throw new Error(SUBMISSION_NOT_FOUND);
 
       let submissionUpdate = await update(params.submission_id, body);
 
@@ -160,7 +160,7 @@ class submissionController {
         deleted_at: null
       });
 
-      if (!submissionExist) throw new Error(SUBMISSION_NOT_FOUND);
+      if (submissionExist.length === 0) throw new Error(SUBMISSION_NOT_FOUND);
 
       /**
        * Delete submission

@@ -22,14 +22,16 @@ exports.find = async (
     filterdWhere = "where ";
 
     for (let i in Object.keys(where)) {
-      condition.push(` ${Object.keys(where)[i]}="${Object.values(where)[i]}" `);
+      condition.push(
+        ` questions.${Object.keys(where)[i]}="${Object.values(where)[i]}" `
+      );
     }
   }
   filterdWhere += condition.length > 0 ? condition.join("and") : filterdWhere;
   console.log(">>>>>>", filterdWhere);
   // let query;
   return await db.query(
-    `SELECT * FROM questions ${filterdWhere} ${orderBy} ${gropuBy}`
+    `SELECT questions.*, levels.title as level_title, levels.levle_index as level_index FROM questions LEFT JOIN levels on questions.level_id = levels.id ${filterdWhere} ${orderBy} ${gropuBy}`
   );
 };
 

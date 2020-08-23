@@ -71,19 +71,34 @@ class answerController {
    */
   async create(req, res, next) {
     let { body } = req;
-    let { getOneWhere, create } = answerService;
+    let { getOneWhere, create, update } = answerService;
     try {
       /**
        * Add answer
        **/
       // body.answered_by = req.user.id;
-      let answerSave = await create(body);
-
-      if (answerSave.error) throw new Error(DATABASE_INTERNAL);
-
-      let answer = await getOneWhere({
-        id: answerSave.insertId
+      let answer = {};
+      let answerExist = await getOneWhere({
+        submission_id: body.submission_id,
+        question_id: body.question_id
       });
+      // console.log(answerExist);
+      if (answerExist.length === 0) {
+        let answerSave = await create(body);
+
+        if (answerSave.error) throw new Error(DATABASE_INTERNAL);
+
+        answer = await getOneWhere({
+          id: answerSave.insertId
+        });
+      } else {
+        let answerUpdate = await update(answerExist[0].id, body);
+        // console.log(answerUpdate);
+        answer = await getOneWhere({
+          submission_id: body.submission_id,
+          question_id: body.question_id
+        });
+      }
 
       return res.json({
         message: "",
@@ -111,7 +126,7 @@ class answerController {
         id: params.answer_id
       });
 
-      if (!answerExist) throw new Error(ANSWER_NOT_FOUND);
+      if (answerExist.length === 0) throw new Error(ANSWER_NOT_FOUND);
 
       let answerUpdate = await update(params.answer_id, body);
 
