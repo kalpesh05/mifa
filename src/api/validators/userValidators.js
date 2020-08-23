@@ -66,6 +66,9 @@ exports.create = Joi.object().keys({
     .required(),
   level: Joi.number()
     .error(new Error(errorMessages.LEVEL))
+    .optional(),
+  is_retry_allowed: Joi.number()
+    .error(new Error(errorMessages.IS_RERTY_ALLOWED))
     .optional()
 });
 
@@ -94,6 +97,9 @@ exports.update = Joi.object().keys({
     .optional(),
   level: Joi.number()
     .error(new Error(errorMessages.LEVEL))
+    .optional(),
+  is_retry_allowed: Joi.number()
+    .error(new Error(errorMessages.IS_RERTY_ALLOWED))
     .optional()
 });
 

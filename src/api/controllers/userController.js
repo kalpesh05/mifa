@@ -7,6 +7,7 @@ const {
 } = require("../../services");
 const {
   USER_ALREADY_REGISTERED,
+  STUDENT_ALREADY_EXIST,
   DATABASE_INTERNAL,
   USER_NOT_FOUND
 } = require("../constants/errorMessages");
@@ -21,8 +22,9 @@ class userController {
    * @returns {Promise<*>}
    */
   async getAllUsers(req, res, next) {
+    let query = req.query;
     try {
-      const users = await userService.getAllUsers();
+      const users = await userService.getAllWhere(query);
       return res.json({
         data: users
       });
@@ -83,6 +85,13 @@ class userController {
         body.class_code = classCode();
       } else if (body.role === "student") {
         body.class_code = req.user.class_code;
+
+        let studentExist = await userService.getOneWhere({
+          username: body.username,
+          class_code: req.user.class_code
+        });
+
+        if (studentExist.length > 0) throw new Error(STUDENT_ALREADY_EXIST);
       }
       // console.log("????", body);
       const createUser = await userService.create(body);
@@ -104,6 +113,7 @@ class userController {
     try {
       let report = [];
       let finalReport = [];
+      let question_answer_groupby_level = [];
       let getSubmission = await submissionService.getAllWhere({
         created_by: req.user.id
       });
@@ -117,9 +127,10 @@ class userController {
           getSubmission[0].id
         );
         // console.log(answers);
-        report.push({
-          question: questions[i]["question"],
+        question_answer_groupby_level.push({
+          question: questions[i]["title"],
           question_id: questions[i]["id"],
+          correct_answer: questions[i]["correct_answer"],
           level_id: questions[i]["level_id"],
           level_title: questions[i]["level_title"],
           level_index: questions[i]["level_index"],
@@ -135,11 +146,20 @@ class userController {
         });
       }
 
-      finalReport = orderBy(report, ["level_index"], ["asc"]).map(v =>
-        omit(v, ["level_index"])
+      question_answer_groupby_level = orderBy(
+        question_answer_groupby_level,
+        ["level_index"],
+        ["asc"]
+      ).map(v => omit(v, ["level_index"]));
+      question_answer_groupby_level = groupBy(
+        question_answer_groupby_level,
+        "level_title"
       );
-      finalReport = groupBy(finalReport, "level_title");
-
+      finalReport.push({
+        question_answer_groupby_level: question_answer_groupby_level,
+        submission_status: getSubmission[0].status,
+        submission_assign_level_id: getSubmission[0].assigned_level_id
+      });
       return res.json({
         data: finalReport
       });
@@ -165,7 +185,7 @@ class userController {
         id: params.user_id
       });
 
-      if (!userExist) throw new Error(USER_NOT_FOUND);
+      if (userExist.length === 0) throw new Error(USER_NOT_FOUND);
 
       let userUpdate = await update(params.user_id, body);
 

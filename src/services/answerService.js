@@ -45,7 +45,7 @@ class answerService {
 
   async getAnswersByUserSubmissions(id, submission_id, question_id) {
     return answerModel.query(
-      `SELECT answers.*, submissions.status as submissionType, submissions.assigned_level as assignLevel FROM answers join submissions ON submissions.id = answers.submission_id where submissions.created_by = ${id} and answers.question_id = ${question_id} and submissions.id = ${submission_id}`
+      `SELECT answers.*, submissions.status as submissionType, submissions.assigned_level_id as assignLevel FROM answers join submissions ON submissions.id = answers.submission_id where submissions.created_by = ${id} and answers.question_id = ${question_id} and submissions.id = ${submission_id}`
     );
   }
 }

@@ -15,8 +15,8 @@ class questionService {
   }
 
   async create(model) {
-    let question = await questionModel.findOne({ question: model.question });
-    if (question.length > 0) throw new Error(ALREADY_EXIST);
+    // let question = await questionModel.findOne({ question: model.question });
+    // if (question.length > 0) throw new Error(ALREADY_EXIST);
 
     return questionModel.create(model);
   }

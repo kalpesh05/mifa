@@ -167,3 +167,9 @@ ALTER TABLE `mifa`.`submissions`
 CHANGE COLUMN `type` `status` VARCHAR(45) NULL DEFAULT NULL ;
 
 ```
+
+```
+ALTER TABLE `mifa`.`users` 
+ADD COLUMN `is_retry_allowed` INT(1) NULL DEFAULT 0 AFTER `updated_at`;
+
+```

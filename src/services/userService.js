@@ -78,7 +78,7 @@ class userService {
 
   async getQuestions(id) {
     return userModel.query(
-      `SELECT questions.question FROM questions where id = ${id}`
+      `SELECT questions.title FROM questions where id = ${id}`
     );
   }
 

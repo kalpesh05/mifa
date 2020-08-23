@@ -17,6 +17,7 @@ exports.EMAIL_ADDRESS_ALREADY_REGISTERED =
   "400::That email address is already registered with us.";
 exports.USER_ALREADY_REGISTERED = "400::User already exist.";
 exports.ALREADY_EXIST = "400::Already exist.";
+exports.STUDENT_ALREADY_EXIST = "400::username already taken.";
 exports.INVALID_EMAIL_TOKEN =
   "401::Email verify token is invalid or has expired.";
 exports.INVALID_TOKEN = "401::Invalid Token";
@@ -36,15 +37,19 @@ exports.USER_NOT_ALLOWED = "400::User not allowed.";
 exports.INVALID_PASSWORD_TOKEN =
   "401::Password reset token is invalid or has expired.";
 exports.TITLE_INVALID = "400::title is invalid.";
-exports.QUESTION_INVALID = "400::question is invalid.";
+exports.QUESTION_INVALID = "400::question title is invalid.";
 exports.INDEX = "400::index is invalid.";
 exports.ASSESMENT_TYPE = "400::assesment_type_id is invalid.";
 exports.LEVEL = "400::level_id is invalid.";
 exports.ASSIGN_LEVEL = "400::assign_level is invalid.";
+exports.ASSESSMENT_TYPE_ID = "400::assessment_type_id is invalid.";
 exports.CORRECT_ANSWER = "400::correct_answer is invalid.";
 exports.SUBMISSION = "400::submission_id is invalid.";
 exports.SUBMISSION_STATUS = "400::status is invalid.";
 exports.QUESTION = "400::question_id is invalid.";
 exports.ANSWER = "400::answer is invalid.";
 exports.IS_CORRECT = "400::is_correct is invalid.";
+exports.IS_ATTEMPTED = "400::is_attempted is invalid.";
 exports.RERTY_COUNT = "400::retry_count is invalid.";
+exports.TIME_TAKEN_IN_MS = "400::time_taken_in_ms is invalid.";
+exports.IS_RERTY_ALLOWED = "400::is_retry_allowed is invalid.";

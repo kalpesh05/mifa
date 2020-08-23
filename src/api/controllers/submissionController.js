@@ -83,6 +83,10 @@ class submissionController {
 
       if (submissionSave.error) throw new Error(DATABASE_INTERNAL);
 
+      let updateretyrflag = await userService.update(req.user.id, {
+        is_retry_allowed: 0
+      });
+
       let submission = await getOneWhere({
         id: submissionSave.insertId
       });
