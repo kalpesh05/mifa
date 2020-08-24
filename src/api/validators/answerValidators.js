@@ -8,7 +8,7 @@ exports.create = Joi.object().keys({
   question_id: Joi.number()
     .error(new Error(errorMessages.QUESTION))
     .required(),
-  answer: Joi.number()
+  answer: Joi.any()
     .error(new Error(errorMessages.ANSWER))
     .required(),
   retry_count: Joi.number()
@@ -32,7 +32,7 @@ exports.update = Joi.object().keys({
   question_id: Joi.number()
     .error(new Error(errorMessages.QUESTION))
     .optional(),
-  answer: Joi.number()
+  answer: Joi.any()
     .error(new Error(errorMessages.ANSWER))
     .optional(),
   retry_count: Joi.number()
