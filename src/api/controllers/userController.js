@@ -90,7 +90,9 @@ class userController {
 
         if (teacherExist.length > 0) throw new Error(TEACHER_ALREADY_EXIST);
       } else if (body.role === "student") {
-        body.class_code = req.user.class_code;
+        body.class_code = body.class_code
+          ? body.class_code
+          : req.user.class_code;
 
         let studentExist = await userService.getOneWhere({
           username: body.username,
@@ -99,7 +101,7 @@ class userController {
 
         if (studentExist.length > 0) throw new Error(STUDENT_ALREADY_EXIST);
       }
-      // console.log("????", body);
+
       const createUser = await userService.create(body);
 
       const getUser = await userService.getOneWhere({
