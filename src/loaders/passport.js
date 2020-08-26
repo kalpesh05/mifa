@@ -62,35 +62,22 @@ passport.use(jwtStrategy);
  */
 const loginLocalStrategy = new localStrategy(
   {
-    usernameField: "username",
+    usernameField: "email",
     passwordField: "password",
     passReqToCallback: true,
     session: false
   },
   async (req, email, password, done) => {
-    let field = email.includes("@") ? { email: email } : { username: email };
-    field = req.body.class_code
-      ? { ...field, ...{ class_code: req.body.class_code } }
-      : field;
-
-    if (req.body.role === "student" && !req.body.class_code) {
-      return done({ message: CLASS_CODE_MISSING }, false);
-    }
+    let field = { email: email };
 
     let user = await getOneWhere(field);
-    console.log(user[0]);
-    user = req.body.role === "student" ? user[0] : omit(user[0], ["level"]);
+    user = omit(user[0], ["level"]);
     if (!user) {
       return done({ message: USER_NOT_FOUND }, false);
     }
 
-    // const { password: saltedPassword } = await cryptoPassword(
-    //   user.salt,
-    //   password
-    // );
-
     const isMatchPassword = password === user.password ? true : false;
-    // console.log(password, user.password);
+
     if (isMatchPassword) {
       const tokenObj = {
         user_id: user.id,
@@ -98,9 +85,50 @@ const loginLocalStrategy = new localStrategy(
       };
 
       const token = await create(tokenObj);
-      // console.log(token);
+
       const getToken = await getOne(token.insertId);
-      // console.log(getToken);
+
+      return done(null, { user, token: getToken[0]["token"] });
+    } else {
+      return done({ message: INVALID_PASSWORD }, false);
+    }
+  }
+);
+/**
+ * Passport student login local strategy
+ */
+const studentLoginLocalStrategy = new localStrategy(
+  {
+    usernameField: "username",
+    passwordField: "password",
+    passReqToCallback: true,
+    session: false
+  },
+  async (req, username, password, done) => {
+    let field = { username: username, class_code: req.body.class_code };
+
+    if (!req.body.class_code) {
+      return done({ message: CLASS_CODE_MISSING }, false);
+    }
+
+    let user = await getOneWhere(field);
+
+    user = user[0];
+    if (!user) {
+      return done({ message: USER_NOT_FOUND }, false);
+    }
+
+    const isMatchPassword = password === user.password ? true : false;
+
+    if (isMatchPassword) {
+      const tokenObj = {
+        user_id: user.id,
+        type: "user_login"
+      };
+
+      const token = await create(tokenObj);
+
+      const getToken = await getOne(token.insertId);
 
       return done(null, { user, token: getToken[0]["token"] });
     } else {
@@ -113,5 +141,11 @@ const loginLocalStrategy = new localStrategy(
  * Passport login local strategy
  */
 passport.use("login", loginLocalStrategy);
+
+/**
+ * Passport student login local strategy
+ */
+
+passport.use("student-login", studentLoginLocalStrategy);
 
 module.exports = passport;

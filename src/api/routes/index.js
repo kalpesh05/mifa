@@ -18,6 +18,11 @@ const routes = [
     handler: "AuthController.login"
   },
   {
+    method: "POST",
+    path: "/student-login",
+    handler: "AuthController.studentLogin"
+  },
+  {
     method: "GET",
     path: "/logout",
     handler: "AuthController.logout",
@@ -235,7 +240,7 @@ routes.forEach(route => {
 
   let middleware = [(req, res, next) => next()];
   let validationMiddlware = (req, res, next) => {
-    console.log("ss", handler);
+    // console.log("ss", handler);
     validation.validate(req.body, handler);
     next();
   };

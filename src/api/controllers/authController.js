@@ -69,8 +69,49 @@ class authController {
   async login(req, res, next) {
     passport.authenticate("login", function(err, user) {
       try {
-        let role = req.body.role ? req.body.role : "user";
-        console.log("ssss", role, user, err);
+        let role = req.body.role;
+
+        if (req.body && user && role != user.user.role) {
+          throw new Error(USER_NOT_ALLOWED);
+        }
+
+        if (user) {
+          req.logIn(user, err => {
+            if (err) {
+              return next(LOGIN_FAILED);
+            }
+
+            let token = user.token;
+            let userData = user.user;
+
+            res.send({
+              message: LOGIN_SUCCESS,
+              data: {
+                user: userData,
+                token: token
+              }
+            });
+          });
+        } else {
+          return next(err);
+        }
+      } catch (error) {
+        return next(error);
+      }
+    })(req, res, next);
+  }
+
+  /**
+   * Student Login
+   * @param req
+   * @param res
+   * @param {*} next
+   * @returns {Promise<*>}
+   */
+  async studentLogin(req, res, next) {
+    passport.authenticate("student-login", function(err, user) {
+      try {
+        let role = req.body.role ? req.body.role : "student";
 
         if (req.body && user && role != user.user.role) {
           throw new Error(USER_NOT_ALLOWED);

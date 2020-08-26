@@ -28,8 +28,23 @@ exports.register = Joi.object().keys({
     .optional()
 });
 
-exports.login = Joi.object().keys({
+exports.studentLogin = Joi.object().keys({
   username: Joi.string()
+    .min(3)
+    .max(100)
+    .error(new Error(errorMessages.USERNAME))
+    .required(),
+  password: Joi.string()
+    .error(new Error(errorMessages.PASSWORD))
+    .required(),
+  class_code: Joi.string()
+    .error(new Error(errorMessages.CLASS_CODE_INVALID))
+    .optional()
+});
+
+exports.login = Joi.object().keys({
+  email: Joi.string()
+    .email()
     .min(3)
     .max(100)
     .error(new Error(errorMessages.USERNAME))
