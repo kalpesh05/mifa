@@ -140,11 +140,14 @@ class userController {
       let questions = await questionService.getAllWhere({});
 
       for (let i in questions) {
-        let answers = await answerService.getAnswersByUserSubmissions(
-          req.user.id,
-          questions[i]["id"],
-          getSubmission[0].id
-        );
+        let answers =
+          getSubmission.length > 0
+            ? await answerService.getAnswersByUserSubmissions(
+                req.user.id,
+                questions[i]["id"],
+                getSubmission[0].id
+              )
+            : [];
         // console.log(answers);
         question_answer_groupby_level.push({
           question: questions[i]["title"],
