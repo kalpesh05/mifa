@@ -128,13 +128,13 @@ class userController {
   }
 
   async getDetailedLastSubmission(req, res, next) {
-    let { body } = req;
+    let { body, params } = req;
     try {
       let report = [];
       let finalReport = [];
       let question_answer_groupby_level = [];
       let getSubmission = await submissionService.getAllWhere({
-        created_by: req.user.id
+        created_by: params.user_id
       });
 
       let questions = await questionService.getAllWhere({});
@@ -143,7 +143,7 @@ class userController {
         let answers =
           getSubmission.length > 0
             ? await answerService.getAnswersByUserSubmissions(
-                req.user.id,
+                params.user_id,
                 questions[i]["id"],
                 getSubmission[0].id
               )
