@@ -25,7 +25,13 @@ class userController {
   async getAllUsers(req, res, next) {
     let query = req.query;
     try {
-      const users = await userService.getAllWhere(query);
+      let users = await userService.getAllWhere(query);
+      users = users.map(v => {
+        if (v.role !== "student") {
+          delete v.submissions_count;
+        }
+        return v;
+      });
       return res.json({
         data: users
       });
@@ -43,8 +49,13 @@ class userController {
   async getOne(req, res, next) {
     let { params } = req;
     try {
-      const user = await userService.getOne(params.user_id);
-      // console.log(user);
+      let user = await userService.getOne(params.user_id);
+      user = user.map(v => {
+        if (v.role !== "student") {
+          delete v.submissions_count;
+        }
+        return v;
+      });
       return res.json({
         message: "",
         data: user[0]
