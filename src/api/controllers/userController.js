@@ -179,8 +179,10 @@ class userController {
       );
       finalReport.push({
         question_answer_groupby_level: question_answer_groupby_level,
-        submission_status: getSubmission[0].status,
-        submission_assign_level_id: getSubmission[0].assigned_level_id
+        submission_status:
+          getSubmission.length > 0 ? getSubmission[0].status : null,
+        submission_assign_level_id:
+          getSubmission.length > 0 ? getSubmission[0].assigned_level_id : null
       });
       return res.json({
         data: finalReport
