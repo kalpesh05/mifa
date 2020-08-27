@@ -80,15 +80,7 @@ class submissionController {
        **/
       body.created_by = req.user.id;
 
-      let submissionExist = await getOneWhere({
-        created_by: body.created_by,
-        assesment_type_id: body.assesment_type_id
-      });
-
-      let submissionSave =
-        submissionExist.length > 0
-          ? await update(submissionExist[0].id, body)
-          : await create(body);
+      let submissionSave = await create(body);
 
       if (submissionSave.error) throw new Error(DATABASE_INTERNAL);
 
@@ -96,13 +88,8 @@ class submissionController {
         is_retry_allowed: 0
       });
 
-      let id =
-        submissionExist.length > 0
-          ? submissionExist[0].id
-          : submissionSave.insertId;
-
       let submission = await getOneWhere({
-        id: id
+        id: submissionSave.insertId
       });
 
       return res.json({

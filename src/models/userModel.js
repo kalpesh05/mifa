@@ -32,7 +32,7 @@ exports.find = async (
 
   // let query;
   return await db.query(
-    `SELECT users.*, IF(submissions.status IS NULL OR submissions.status = 'inprogress', 0 , 1 ) as submissions_count FROM users LEFT JOIN submissions on submissions.created_by = users.id ${filterdWhere} ${orderBy} ${gropuBy}`
+    `SELECT users.*,  IFNULL((select count(*) from submissions  where submissions.created_by = users.id and submissions.status <> "inprogress" group by submissions.created_by ),0) as submissions_count FROM users ${filterdWhere} ${orderBy} ${gropuBy}`
   );
 };
 
@@ -51,7 +51,7 @@ exports.findOne = async (
   filterdWhere = condition.length > 0 ? condition.join("and") : filterdWhere;
 
   return await db.query(
-    `SELECT users.*, IF(submissions.status IS NULL OR submissions.status = 'inprogress', 0 , 1 ) as submissions_count FROM users LEFT JOIN submissions on submissions.created_by = users.id where ${filterdWhere} ${gropuBy} ${gropuBy}`
+    `SELECT users.*,  IFNULL((select count(*) from submissions  where submissions.created_by = users.id and submissions.status <> "inprogress" group by submissions.created_by ),0) as submissions_count FROM users where ${filterdWhere} ${gropuBy} ${gropuBy}`
   );
 };
 
