@@ -246,7 +246,7 @@ class authController {
       let { getOneWhere, sendForgotPasswordMail } = userService;
       let { removeToken } = tokenService;
 
-      const user = await getOneWhere({ email, deleted_at: null });
+      const user = await getOneWhere({ email });
 
       if (!user) throw new Error(USER_NOT_FOUND);
       let userId = user._id;

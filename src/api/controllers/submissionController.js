@@ -161,8 +161,7 @@ class submissionController {
        * Check valid submission
        */
       let submissionExist = await getOneWhere({
-        id: params.submission_id,
-        deleted_at: null
+        id: params.submission_id
       });
 
       if (submissionExist.length === 0) throw new Error(SUBMISSION_NOT_FOUND);
