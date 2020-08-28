@@ -100,6 +100,9 @@ class answerController {
         });
       }
 
+      // added statically , becuase we check attempted based on answer given or not So it is 1
+      answer[0]["is_attempted"] = 1;
+
       return res.json({
         message: "",
         data: answer[0]
