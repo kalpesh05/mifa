@@ -77,7 +77,7 @@ class answerController {
        * Add answer
        **/
       // body.answered_by = req.user.id;
-      let answer = {};
+      let answer = [];
       let answerExist = await getOneWhere({
         submission_id: body.submission_id,
         question_id: body.question_id
@@ -100,8 +100,7 @@ class answerController {
         });
       }
 
-      // added statically , becuase we check attempted based on answer given or not So it is 1
-      answer[0]["is_attempted"] = 1;
+      // answer[0]["is_attempted"] = body.is_attempted;
 
       return res.json({
         message: "",
