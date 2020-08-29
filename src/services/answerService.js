@@ -19,14 +19,14 @@ class answerService {
       answer: model.answer,
       question_id: model.question_id,
       submission_id: model.submission_id,
-      is_correct: 1
+      is_correct: model.is_correct
     });
     if (answer.length > 0) throw new Error(ALREADY_EXIST);
     let question = await questionModel.findOne({ id: model.question_id });
 
-    if (question && question.length > 0) {
-      model.is_correct = model.answer === question[0]["correct_answer"] ? 1 : 0;
-    }
+    // if (question && question.length > 0) {
+    //   model.is_correct = model.answer === question[0]["correct_answer"] ? 1 : 0;
+    // }
 
     return answerModel.create(model);
   }
