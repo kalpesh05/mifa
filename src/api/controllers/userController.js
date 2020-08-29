@@ -161,9 +161,9 @@ class userController {
           is_attempted: answers.length > 0 ? 1 : 0,
           is_correct: answers.length > 0 ? answers[0]["is_correct"] : 0,
           retry_count: answers.length > 0 ? answers[0]["retry_count"] : 0,
-          time_taken_in_ms:
-            answers.length > 0 && answers[0]["time_taken_in_ms"]
-              ? answers[0]["time_taken_in_ms"]
+          time_taken_in_second:
+            answers.length > 0 && answers[0]["time_taken_in_second"]
+              ? answers[0]["time_taken_in_second"]
               : 0
         });
       }

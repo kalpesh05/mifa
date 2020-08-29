@@ -20,8 +20,8 @@ exports.create = Joi.object().keys({
   is_correct: Joi.number()
     .error(new Error(errorMessages.IS_CORRECT))
     .required(),
-  time_taken_in_ms: Joi.number()
-    .error(new Error(errorMessages.TIME_TAKEN_IN_MS))
+  time_taken_in_second: Joi.number()
+    .error(new Error(errorMessages.TIME_TAKEN_IN_SECOND))
     .required()
 });
 
@@ -44,7 +44,7 @@ exports.update = Joi.object().keys({
   is_correct: Joi.number()
     .error(new Error(errorMessages.IS_CORRECT))
     .optional(),
-  time_taken_in_ms: Joi.number()
-    .error(new Error(errorMessages.TIME_TAKEN_IN_MS))
+  time_taken_in_second: Joi.number()
+    .error(new Error(errorMessages.TIME_TAKEN_IN_SECOND))
     .optional()
 });

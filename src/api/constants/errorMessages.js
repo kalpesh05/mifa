@@ -52,5 +52,5 @@ exports.ANSWER = "400::answer is invalid.";
 exports.IS_CORRECT = "400::is_correct is invalid.";
 exports.IS_ATTEMPTED = "400::is_attempted is invalid.";
 exports.RERTY_COUNT = "400::retry_count is invalid.";
-exports.TIME_TAKEN_IN_MS = "400::time_taken_in_ms is invalid.";
+exports.TIME_TAKEN_IN_SECOND = "400::time_taken_in_second is invalid.";
 exports.IS_RERTY_ALLOWED = "400::is_retry_allowed is invalid.";
