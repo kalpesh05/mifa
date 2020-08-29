@@ -54,3 +54,5 @@ exports.IS_ATTEMPTED = "400::is_attempted is invalid.";
 exports.RERTY_COUNT = "400::retry_count is invalid.";
 exports.TIME_TAKEN_IN_SECOND = "400::time_taken_in_second is invalid.";
 exports.IS_RERTY_ALLOWED = "400::is_retry_allowed is invalid.";
+exports.STUDENT_EXIST_IN_CLASS =
+  "400::Teacher can’t be deleted as Students are present in the class.";

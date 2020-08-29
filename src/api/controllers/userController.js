@@ -9,6 +9,7 @@ const {
   USER_ALREADY_REGISTERED,
   STUDENT_ALREADY_EXIST,
   TEACHER_ALREADY_EXIST,
+  STUDENT_EXIST_IN_CLASS,
   DATABASE_INTERNAL,
   USER_NOT_FOUND
 } = require("../constants/errorMessages");
@@ -266,6 +267,12 @@ class userController {
       });
 
       if (!userExist) throw new Error(QUESTION_NOT_FOUND);
+
+      let studentExist = await getOneWhere({
+        class_code: userExist[0].class_code
+      });
+
+      if (studentExist.length > 1) throw new Error(STUDENT_EXIST_IN_CLASS);
 
       /**
        * Delete  user
