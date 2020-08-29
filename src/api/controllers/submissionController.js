@@ -123,7 +123,7 @@ class submissionController {
       let submissionUpdate = await update(params.submission_id, body);
 
       let changeStudentLevel = await userService.update(req.user.id, {
-        level: body.assigned_level
+        level: body.assigned_level_id
       });
 
       /**
