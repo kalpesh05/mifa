@@ -267,14 +267,14 @@ class userController {
       });
 
       if (!userExist) throw new Error(QUESTION_NOT_FOUND);
+      if (userExist[0].role === "teacher") {
+        let studentExist = await getOneWhere({
+          class_code: userExist[0].class_code,
+          role: "student"
+        });
 
-      let studentExist = await getOneWhere({
-        class_code: userExist[0].class_code,
-        role: "student"
-      });
-
-      if (studentExist.length > 0) throw new Error(STUDENT_EXIST_IN_CLASS);
-
+        if (studentExist.length > 0) throw new Error(STUDENT_EXIST_IN_CLASS);
+      }
       /**
        * Delete  user
        */
