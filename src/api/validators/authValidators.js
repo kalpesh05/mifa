@@ -30,8 +30,6 @@ exports.register = Joi.object().keys({
 
 exports.studentLogin = Joi.object().keys({
   username: Joi.string()
-    .min(3)
-    .max(100)
     .error(new Error(errorMessages.USERNAME))
     .required(),
   password: Joi.string()
