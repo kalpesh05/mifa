@@ -27,7 +27,9 @@ exports.DATABASE_INTERNAL = "500::Something went wrong.";
 exports.UNAUTHORIZED = "401::Unauthorized action.";
 exports.LOGIN_FAILED = "400::Login failed.";
 exports.PASSWORD_INVALID = "400::Password is invalid.";
-exports.INVALID_PASSWORD = "400::Password is wrong.";
+exports.INVALID_PASSWORD = "400::Incorrrect Password.";
+exports.INVALID_PASSWORD_STUDENT =
+  "400::‘Incorrect password.  Please try again or see your teacher for help.";
 exports.EMAIL_INVALID = "400::Email is invalid.";
 exports.CLASS_CODE_INVALID = "400::ClassCode is invalid.";
 exports.CLASS_CODE_MISSING = "400::ClassCode is missing.";

@@ -15,6 +15,7 @@ const { create, getOne } = require("../services/tokenService");
 const { omit } = require("lodash");
 const {
   INVALID_PASSWORD,
+  INVALID_PASSWORD_STUDENT,
   UNAUTHORIZED,
   USER_NOT_FOUND,
   CLASS_CODE_MISSING
