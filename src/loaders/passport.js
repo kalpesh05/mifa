@@ -133,7 +133,7 @@ const studentLoginLocalStrategy = new localStrategy(
 
       return done(null, { user, token: getToken[0]["token"] });
     } else {
-      return done({ message: INVALID_PASSWORD }, false);
+      return done({ message: INVALID_PASSWORD_STUDENT }, false);
     }
   }
 );
