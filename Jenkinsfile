@@ -15,6 +15,7 @@ pipeline {
       DEV_IP = "54.177.202.199"
       STAGE_IP = "13.56.135.55"
       SSH_AGENT = "mifa-california-ssh"
+      REPO_DIR = '.'
       ARTIFACT_NAME = "${env.SERVICE_NAME}#${env.BRANCH_NAME}#${env.BUILD_NUMBER}"
       EMAIL_TO_SEND_CC_DEV = "nikunjmavani.albetrios@gmail.com"
       EMAIL_TO_SEND_CC_PROD = "nikunjmavani.albetrios@gmail.com"
