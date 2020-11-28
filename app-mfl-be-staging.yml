@@ -1,0 +1,6 @@
+apps:
+  - name: mfl-be-staging
+    restart_delay: 100
+    script: "npm run start"
+    max_memory_restart: 500M
+    autorestart: true
